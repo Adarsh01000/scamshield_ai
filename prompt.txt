@@ -1,0 +1,131 @@
+SCAMSHIELD AI — ANTIGRAVITY MASTER BUILD PROMPT
+Agentic AI • Multi-Modal Scam Detection • Explainable Risk Assessment
+Instructions for the Antigravity coding agent
+You are the lead software architect and implementation agent for ScamShield AI. Build the project incrementally, test each milestone before proceeding, preserve a clean modular architecture, and never fabricate model accuracy or test results. The final system must be demonstrable as a college mini-project and must support clear technical explanation during viva.
+1. Project Definition
+Project title: ScamShield AI: AI-Based Multi-Modal Scam Detection and Explainable Risk Assessment.
+
+ScamShield AI analyzes SMS, WhatsApp messages, emails, website URLs, and screenshots to identify potential scam indicators. It should not merely return “Scam” or “Not Scam”. It must show evidence, produce a risk score, explain the reasoning, and recommend safe next actions.
+2. Core Agentic Architecture
+Use an orchestrated multi-agent pipeline:
+User Input → Orchestrator Agent → specialized analysis agents → Evidence Agent → Risk Fusion Agent → Explanation Agent → Dashboard.
+
+Agents:
+1. Orchestrator Agent — identifies input modality, validates input, selects required analysis steps, and coordinates execution.
+2. NLP Agent — analyzes SMS/WhatsApp/email text for urgency, threats, impersonation, financial requests, OTP/password/credential requests, suspicious social-engineering patterns, and other text indicators.
+3. URL Agent — extracts lexical and structural URL features such as length, subdomains, IP-based hosts, unusual characters/tokens, suspicious terms, scheme, domain structure, and related indicators; uses a machine-learning classifier.
+4. OCR Agent — extracts text and URLs from screenshots and sends extracted content to the NLP and URL pipelines.
+5. Vision Agent — optional/advanced module for visual webpage or screenshot characteristics. Keep it modular so the core system works without it.
+6. Evidence Agent — converts model outputs into structured, auditable evidence.
+7. Risk Fusion Agent — combines modality-specific evidence into a normalized 0–100 risk score and ranked indicators.
+8. Explanation Agent — uses structured evidence to generate a human-readable explanation. The LLM must not be the sole classifier.
+9. Evaluation Agent — runs repeatable test cases and computes precision, recall, F1-score, confusion matrix and multi-modal ablation results.
+3. Development Milestones
+V0.1 Foundation: project structure, environment, configuration, common schemas, logging, basic dashboard.
+V0.2 Text pipeline: Orchestrator → NLP → Evidence → Risk Fusion → Explanation → Dashboard.
+V0.3 URL pipeline: URL feature extraction + ML classifier + evidence integration.
+V0.4 Screenshot pipeline: OCR extraction + NLP/URL reuse.
+V0.5 Multi-modal fusion: combine text, URL and screenshot evidence.
+V0.6 Optional vision analysis and improved explanation layer.
+V0.7 Evaluation: datasets, train/test split, precision, recall, F1, confusion matrix, false-positive analysis, ablation experiments.
+V1.0 Final prototype: polished UI, complete demo workflow, documentation, UML, test cases and viva material.
+4. Functional Requirements
+Accept SMS, WhatsApp message text, email text, URL, and screenshot inputs.
+Automatically determine the required analysis path.
+Extract scam indicators and preserve their source.
+Produce a normalized risk score and ranked indicators.
+Explain the result using structured evidence.
+Provide a safety recommendation.
+Allow repeated analysis without restarting the application.
+Log analysis metadata needed for testing without storing sensitive user content unnecessarily.
+5. Non-Functional Requirements
+Modular and maintainable architecture.
+Clear separation between detection, evidence, fusion and explanation.
+Reproducible model evaluation.
+Graceful handling of invalid or incomplete input.
+Reasonable response time for a student-project demo.
+Privacy-conscious handling of uploaded screenshots and messages.
+Readable UI suitable for live demonstration.
+Every important prediction must be traceable to evidence.
+6. Suggested Technology Stack
+Python; FastAPI for backend APIs; Streamlit or a similarly simple web UI for the prototype; scikit-learn and/or XGBoost for URL classification; a compact Transformer/BERT-family model for text classification where feasible; Tesseract or another OCR engine for screenshots; SQLite for local project data; and an LLM API/local model only for the explanation layer. Keep dependencies practical for a college laptop and document any optional dependency.
+7. Common Evidence Schema
+Every detector should return a consistent structure similar to:
+{
+  "indicator": "urgency_language",
+  "detected": true,
+  "severity": "high",
+  "confidence": 0.91,
+  "source": "nlp_agent",
+  "evidence": "urgent / account will be blocked",
+  "explanation": "The text creates pressure to act immediately."
+}
+Do not invent confidence values; use real model outputs or clearly label heuristic values.
+8. Risk Fusion
+Implement risk fusion as a transparent, configurable component. Start with documented weights or a simple calibrated rule/model and make the weights configurable. Do not claim the weights are scientifically optimal until validation experiments support them. Store modality scores, contributing indicators and the final score so the result can be audited.
+9. Example Final Result
+Potential Scam
+Risk Score: [calculated score]/100
+
+Detected Indicators:
+• Urgency language
+• Possible impersonation
+• Financial request
+• Credential/OTP request
+• Suspicious URL structure
+
+Explanation:
+[LLM-generated explanation grounded only in structured evidence.]
+
+Recommended Action:
+Avoid clicking suspicious links or sharing OTPs, passwords or financial information. Verify the request through an independent official channel.
+10. Evaluation Plan
+Create/obtain clearly documented legitimate and scam samples for each supported modality.
+Separate training/validation/test data where model training is used.
+Report precision, recall and F1-score, not accuracy alone.
+Show a confusion matrix for classification components where applicable.
+Analyze false positives and false negatives.
+Run ablation comparisons such as Text-only, URL-only, Screenshot/OCR-only, Text+URL, and Full Fusion.
+Do not place invented performance numbers in the report. Replace placeholders with measured results.
+11. UML and Documentation Deliverables
+Use Case Diagram
+Activity Diagram
+Sequence Diagram
+Component Diagram
+Class Diagram
+Deployment Diagram
+System architecture diagram
+Data-flow/pipeline description
+Functional and non-functional requirements table
+Test-case table
+Evaluation results and graphs
+Limitations and future work
+12. Assessment Alignment
+The official Mini Project Work - Assessment allocates 50 marks to the First Assessment and 50 marks to the Final Assessment, for a total of 100 marks.
+13. Engineering Rules for the Agent
+Do not overwrite working code without preserving a recoverable version.
+Before adding a new agent, test the previous pipeline.
+Use typed interfaces/data models between agents.
+Keep secrets/API keys in environment variables, never source code.
+Add unit tests for feature extraction, evidence generation and risk fusion.
+Use mock/fallback components when an external API is unavailable so the demo remains usable.
+Never claim a model is trained when it is only a heuristic.
+Never fabricate datasets, citations, metrics or screenshots.
+Keep a README with setup, run commands, architecture, tests and known limitations.
+At the end of each milestone, summarize what works, what was tested, and what remains.
+14. First Task — Begin Here
+Do not build the complete system in one step. First create V0.1 only:
+1. Create the repository/folder structure.
+2. Create a Python virtual environment and requirements file.
+3. Create configuration and environment-variable handling.
+4. Create shared Pydantic/data classes for Input, Evidence, AgentResult and FinalRiskResult.
+5. Create the Orchestrator interface.
+6. Create stub NLP, Evidence, Risk Fusion and Explanation agents with deterministic demo behavior.
+7. Create a simple dashboard that accepts text and displays the structured result.
+8. Add basic tests.
+9. Run the application and tests.
+10. Stop and report the exact files created, commands used, tests passed/failed, and the next milestone. Do not proceed to URL/OCR until V0.1 is working.
+15. Final Product Vision
+The final demonstration should allow a user to submit a message, URL, email or screenshot and see ScamShield AI coordinate specialized analysis, extract evidence, calculate a transparent risk score, explain why the content is suspicious, and recommend a safe action. The system should look like one coherent cybersecurity product rather than a collection of unrelated AI demos.
+16. Team Working Rule
+Divide implementation ownership by module, but require every team member to understand the complete pipeline. Keep a shared changelog and demo checklist. Each major module must have a short explanation suitable for viva: purpose, input, algorithm/model, output, limitations and test evidence.
