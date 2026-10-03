@@ -4,6 +4,11 @@ import os
 import pandas as pd
 from PIL import Image
 import streamlit as st
+import sys
+from pathlib import Path
+
+# Fix for Streamlit Cloud import errors
+sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 from src.agents.orchestrator import OrchestratorAgent
 from src.agents.evaluation import EvaluationAgent
